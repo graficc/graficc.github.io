@@ -1,0 +1,13 @@
+---
+baseurl: "/"
+DefaultContentLanguage: "zh-cn"
+hasCJKLanguage: true
+languageCode: "zh-cn"
+title: "Horel's Blog"
+theme: "FeelIt"
+metaDataFormat: "yaml"
+algolia:
+  index: "horel_io"
+  key: "3c25929b0c85f0d0d8c5d7c1df7c12d4"
+  appID: "JLSXOSCBYN"
+---

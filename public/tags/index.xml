@@ -1,0 +1,25 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tags - 标签 - Horel&#39;s Blog</title>
+        <link>http://limbostray.github.io/tags/</link>
+        <description>Tags - 标签 - Horel&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 16 Dec 2021 22:55:18 &#43;0000</lastBuildDate><atom:link href="http://limbostray.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>动漫</title>
+    <link>http://limbostray.github.io/tags/%E5%8A%A8%E6%BC%AB/</link>
+    <pubDate>Thu, 16 Dec 2021 22:55:18 &#43;0000</pubDate><guid>http://limbostray.github.io/tags/%E5%8A%A8%E6%BC%AB/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>随笔</title>
+    <link>http://limbostray.github.io/tags/%E9%9A%8F%E7%AC%94/</link>
+    <pubDate>Thu, 16 Dec 2021 22:55:18 &#43;0000</pubDate><guid>http://limbostray.github.io/tags/%E9%9A%8F%E7%AC%94/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>游戏</title>
+    <link>http://limbostray.github.io/tags/%E6%B8%B8%E6%88%8F/</link>
+    <pubDate>Tue, 27 Apr 2021 11:40:30 &#43;0000</pubDate><guid>http://limbostray.github.io/tags/%E6%B8%B8%E6%88%8F/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>
