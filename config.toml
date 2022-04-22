@@ -153,10 +153,10 @@ theme = "FeelIt"
     # 是否启用参数布局
     param = true
     # 参数布局的标题
-    paramTitle = "个人信息"
+    paramTitle = "Personal Information"
     # 您网站的一般描述
     # 可以用markdown样式写
-    description = "Blog mainly about Immersive Video, Coding Tech and GNU/Linux."
+    description = "<h1>This&#39;s Horel&#39;s Official Blog.</h1><p>Mainly about Computer Graphics, C/C++ and Linux.</p><p>Welcome to exchange technology with me.</p><p>You can find my essays about anime and games on this <a href=\"https://horel.github.io\">unofficial blog</a>.</p>"
     # 你的状态描述
     [[params.about.status]]
       faIcon = "fas fa-building"
@@ -172,14 +172,14 @@ theme = "FeelIt"
       desc = "Dalian"
     # 参数说明
     [[params.about.parameter]]
-      language = "UI/UX"
-      level = "80"
+      language = "Computer Graphics"
+      level = "30"
     [[params.about.parameter]]
-      language = "HTML"
-      level = "70"
-    [[params.about.parameter]]
-      language = "Go"
+      language = "C/C++"
       level = "60"
+    [[params.about.parameter]]
+      language = "Linux"
+      level = "40"
 
  # 主页配置
   [params.home]
@@ -191,17 +191,17 @@ theme = "FeelIt"
       enable = true
       # 主页显示头像的 URL
 # TODO
-      avatarURL = "https://tva4.sinaimg.cn/large/008ieO5lly8gpxh7gr2ajj308c08c3yp.jpg"
+      avatarURL = "https://tva4.sinaimg.cn/large/008ieO5lly8h1itddxtf1j30e80e8gmp.jpg"
       # FeelIt 更改 | 0.2.7
       # 主页显示的网站副标题
-      subtitle = "Until to the End of Interest..."
+      subtitle = "= Siege Lions are not engineers. ="
       # 是否为副标题显示打字机动画
       typeit = true
       # 是否显示社交账号
       social = true
       # FeelIt 新增 | 0.2.0
       # 免责声明 (支持 HTML 格式)
-      disclaimer = "Hardwork always pays off, whatever you do."
+      disclaimer = "There is a crack in everything , that's how the light gets in ."
     # 主页文章列表
     [params.home.posts]
       enable = true
