@@ -3,17 +3,24 @@
 
 ## 个人概况
 
-20 岁，北京邮电大学 18 级软件工程专业本科生，已推免至[北京邮电大学网络智能中心](https://int.bupt.edu.cn/content/content.php?p=2_6_10)。
+大连理工大学19级软件工程学院本科生，大三在读。
 
-目前主要的研究方向是全景视频的传输（VR or [Metaverse](https://en.wikipedia.org/wiki/Metaverse)）。
+目前主要的研究方向是计算机图形学（[Computer Graphics](https://en.wikipedia.org/wiki/Computer_graphics)）。
 
-Life is hard, so any rational person will give up if you don't have **Passion**.
+最喜爱的程序员是[John Carmack](https://en.wikipedia.org/wiki/John_Carmack)和[Linus Torvalds](https://en.wikipedia.org/wiki/Linus_Torvalds)
+
+![John Carmack](https://tva4.sinaimg.cn/large/008ieO5lly8gqmb5tqfs4j30go093wfi.jpg)
+![Linus Torvalds](https://pic3.zhimg.com/v2-6ec17a4f184ee3702974b74024d22ba1_720w.jpg?source=7e7ef6e2)
+
+Which hurts more , the pain of **hard work** or the pain of **regret** ?
+
+## 个人项目
+
+- 个人博客网站：[https://horel.github.io/](https://horel.github.io/)
+
+- GAMES101作业：[https://github.com/horel/GAMES101/](https://github.com/horel/GAMES101/)
 
 ## 友链
 
-- cl 的博客：[https://clslaid.icu/](https://clslaid.icu/)
-- 黄鸡的博客：[https://hyiker.com/](https://hyiker.com/)
-- z217 的博客：[https://z217blog.cn/](https://z217blog.cn/)
-- Tackoil 的博客：[https://tackoil.github.io/](https://tackoil.github.io/)
-- Leeshy 的博客: [https://leeshy-tech.github.io/](https://leeshy-tech.github.io/)
+- Horel 的 UnOfficial 博客：[https://horel.github.io/](https://horel.github.io/)
 
