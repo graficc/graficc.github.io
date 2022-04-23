@@ -30,3 +30,4 @@ Which hurts more , the pain of **hard work** or the pain of **regret** ?
 ## 友链
 
 - Horel 的 UnOfficial 博客：[https://horel.github.io/](https://horel.github.io/)
+- Gan 的博客：[https://www.zlgan.top/](https://www.zlgan.top/)
