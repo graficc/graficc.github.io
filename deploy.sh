@@ -15,3 +15,4 @@ git commit -m "$1"
 sleep 0.5s
 
 xclip -sel clip < ~/Documents/tocken_limbo.txt
+git push origin main
