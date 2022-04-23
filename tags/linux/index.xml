@@ -1,0 +1,766 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Linux - 标签 - Horel&#39;s Blog</title>
+        <link>http://limbostray.github.io/tags/linux/</link>
+        <description>Linux - 标签 - Horel&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1494255412@mail.dlut.edu.cn (Horel)</managingEditor>
+            <webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Mon, 26 Apr 2021 22:50:04 &#43;0000</lastBuildDate><atom:link href="http://limbostray.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
+    <title>Arch Linux指南</title>
+    <link>http://limbostray.github.io/posts/arch-linux%E6%8C%87%E5%8D%97/</link>
+    <pubDate>Mon, 26 Apr 2021 22:50:04 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/arch-linux%E6%8C%87%E5%8D%97/</guid>
+    <description><![CDATA[<h1 id="安装前的准备工作">安装前的准备工作</h1>
+<h2 id="下载镜像">下载镜像</h2>
+<p>可以去北京外国语(bfsu)大学的镜像站获取最新的iso，地址如下：<a href="https://mirrors.bfsu.edu.cn/" target="_blank" rel="noopener noreffer">广度优先搜索(bfsu)大学开源镜像站</a></p>
+<h2 id="准备一个u盘">准备一个U盘</h2>
+<p>任意品牌，最好是USB3.0以上的，8G就够</p>
+<h2 id="制作启动盘">制作启动盘</h2>
+<p>win10系统推荐使用rufus软件烧录：<a href="https://rufus.ie/zh" target="_blank" rel="noopener noreffer">rufus</a></p>
+<p>linux系统可以直接使用dd命令烧录：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo dd <span class="k">if</span><span class="o">=</span>Archlinux_name.iso <span class="nv">of</span><span class="o">=</span>/dev/sdb
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="基础系统安装">基础系统安装</h1>
+<h2 id="确认是否为-uefi-模式">确认是否为 UEFI 模式</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ls /sys/firmware/efi/efivars
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>若输出了一堆东西，即 efi 变量，则说明已在 UEFI 模式。否则请确认你的启动方式是否为 UEFI。</p>
+<h2 id="启动参数修改optional">启动参数修改(optional)</h2>
+<blockquote>
+<p>若正常启动后花屏,说明显卡驱动有问题(例如NVIDIA显卡太新还没有开源驱动)</p>
+</blockquote>
+<p>启动项按e添加<code>modprobe.blacklist=nouveau</code>以禁用开源驱动</p>
+<h2 id="使用iwd联网">使用iwd联网</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">iwctl
+</span></span><span class="line"><span class="cl">device list
+</span></span><span class="line"><span class="cl">station wlan0 scan
+</span></span><span class="line"><span class="cl">station wlan0 connect <span class="s2">&#34;网络名_xxx&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="更新系统时间">更新系统时间</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">timedatectl set-ntp <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">timedatectl status
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="分区">分区</h2>
+<p>我在/dev/nvme0n1这块硬盘上分了四个区</p>
+<ul>
+<li>/boot	分256M	ef00</li>
+<li>swap    分８G        8200</li>
+<li>/            分100G     8304</li>
+<li>/home 分300G     8302</li>
+</ul>
+<blockquote>
+<p>使用以下命令分区</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">lsblk
+</span></span><span class="line"><span class="cl">gdisk /dev/nvme0n1
+</span></span><span class="line"><span class="cl">用d删除旧分区
+</span></span><span class="line"><span class="cl">用n按上面列出的新建分区
+</span></span><span class="line"><span class="cl">用w确定并退出
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>接下来格式化分区</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkfs.fat -F32 /dev/nvme0n1p1
+</span></span><span class="line"><span class="cl">mkswap /dev/nvme0n1p2
+</span></span><span class="line"><span class="cl">swapon /dev/nvme0n1p2
+</span></span><span class="line"><span class="cl">mkfs.xfs /dev/nvme0n1p3
+</span></span><span class="line"><span class="cl">mkfs.xfs /dev/nvme0n1p4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>然后挂载分区</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mount /dev/nvme0n1p3 /mnt
+</span></span><span class="line"><span class="cl">mkdir /mnt/boot
+</span></span><span class="line"><span class="cl">mkdir /mnt/home
+</span></span><span class="line"><span class="cl">mount /dev/nvme0n1p1 /mnt/boot
+</span></span><span class="line"><span class="cl">mount /dev/nvme0n1p4 /mnt/home
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="选择镜像">选择镜像</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/pacman.d/mirrorlist
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最上面填入：</p>
+<blockquote>
+<p>Server = <a href="https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch" target="_blank" rel="noopener noreffer">https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch</a></p>
+</blockquote>
+<h2 id="安装必须软件包">安装必须软件包</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pacstrap /mnt bash-completion iwd dhcpcd base base-devel linux linux-firmware linux-headers man man-db man-pages texinfo vim xfsprogs ntfs-3g nvidia nvidia-utils nvidia-settings opencl-nvidia
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="生成fstab">生成Fstab</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+</span></span><span class="line"><span class="cl">vim /mnt/etc/fstab
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="chroot至新系统">Chroot至新系统</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">arch-chroot /mnt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="本地化">本地化</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</span></span><span class="line"><span class="cl">hwclock --systohc
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vim /etc/locale.gen
+</span></span><span class="line"><span class="cl">取消注释zh_CN.UTF-8和en_US.UTF-8
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">locale-gen
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vim /etc/locale.conf
+</span></span><span class="line"><span class="cl"><span class="nv">填入LANG</span><span class="o">=</span>en_US.UTF-8
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="网络配置">网络配置</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/hostname
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>填入自己的主机名，例如AORUS</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim /etc/hosts
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>填入如下，要注意主机名相同</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">127.0.0.1	localhost
+</span></span><span class="line"><span class="cl">::1		localhost
+</span></span><span class="line"><span class="cl">127.0.1.1	AORUS.localdomain	AORUS
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="生成initramfs">生成Initramfs</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkinitcpio -P
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="设置密码">设置密码</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">passwd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="安装grub">安装grub</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pacman -Sy grub efibootmgr os-prober
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~
+</span></span><span class="line"><span class="cl">mkdir MS
+</span></span><span class="line"><span class="cl">mount /dev/nvme1n1p1 MS
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#要注意os_prober已经默认不识别其他系统了</span>
+</span></span><span class="line"><span class="cl">vim /etc/default/grub
+</span></span><span class="line"><span class="cl"><span class="nv">最后一行填入GRUB_DISABLE_OS_PROBER</span><span class="o">=</span><span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">grub-install --target<span class="o">=</span>x86_64-efi --efi-directory<span class="o">=</span>/boot --bootloader-id<span class="o">=</span>Arch --recheck
+</span></span><span class="line"><span class="cl">grub-mkconfig -o /boot/grub/grub.cfg
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span>
+</span></span><span class="line"><span class="cl">umount -R /mnt
+</span></span><span class="line"><span class="cl">reboot
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="桌面环境安装">桌面环境安装</h1>
+<h2 id="联网">联网</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl start iwd
+</span></span><span class="line"><span class="cl">dhcpcd
+</span></span><span class="line"><span class="cl">iwctl
+</span></span><span class="line"><span class="cl">station wlan0 connect <span class="s2">&#34;网络名_xxx&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="新建用户并授权">新建用户并授权</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">useradd -m -G wheel 用户名<span class="o">(</span>limbo<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EDITOR</span><span class="o">=</span>vim visudo
+</span></span><span class="line"><span class="cl">取消注释 %wheel <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> ALL
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span>
+</span></span><span class="line"><span class="cl">以新用户重新登陆
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="安装桌面">安装桌面</h2>
+<blockquote>
+<p>安装gnome40桌面</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -S xorg gdm gnome gnome-tweaks chrome-gnome-shell
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="自启动设置">自启动设置</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl preset-all
+</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> gdm
+</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> NetworkManager
+</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> bluetooth
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="配置cn源">配置CN源</h2>
+<blockquote>
+<p>vim /etc/pacman .conf</p>
+<p>加入以下内容</p>
+</blockquote>
+<p>[archlinuxcn]</p>
+<p>Server = <a href="https://mirrors.bfsu.edu.cn/archlinuxcn/$arch" target="_blank" rel="noopener noreffer">https://mirrors.bfsu.edu.cn/archlinuxcn/$arch</a></p>
+<h2 id="pacman配置">pacman配置</h2>
+<blockquote>
+<p>vim /etc/pacman.conf	吃豆人、升级前后对比版本</p>
+</blockquote>
+<p>Color</p>
+<p>ILoveCandy</p>
+<p>VerbosePkgLists</p>
+<h2 id="安装常用软件">安装常用软件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -S zsh alacritty git wget typora telegram google-chrome chromium neofetch gcc gdb clang llvm nodejs yarn visual-studio-code-bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="挂起设置">挂起设置</h2>
+<blockquote>
+<p>vim /etc/fstab 把swap的UUID复制下来</p>
+</blockquote>
+<blockquote>
+<p>sudo vim /etc/default/grub	在GRUB_CMDLINE_LINUX_DEFAULT里添加例如如下的UUID</p>
+<p>resume=UUID=b184a7a0-a9c4-431c-b0a7-f50bbf052eb5</p>
+</blockquote>
+<blockquote>
+<p>sudo vim /etc/mkinitcpio.conf	修改例如如下的内容</p>
+<p>HOOKS=(base udev resume autodetect modconf block filesystems keyboard fsck)</p>
+</blockquote>
+<h1 id="软件安装配置">软件安装配置</h1>
+<h2 id="dotfiles">dotfiles</h2>
+<p><a href="https://github.com/horel/dotfiles.git" target="_blank" rel="noopener noreffer">我个人的dotfiles，请根据自身情况修改</a></p>
+<h2 id="配置环境变量">配置环境变量</h2>
+<p>;;;id1 vi .xprofile</p>
+<p>填入dotfiles里的系统环境变量</p>
+<p>;;;</p>
+<p>;;;id1 vi .gitconfig</p>
+<p>填入dotfiles里的git环境变量</p>
+<p>;;;</p>
+<p>;;;id1 vi .yarnrc</p>
+<p>填入dotfiles里的yarn环境变量</p>
+<p>;;;</p>
+<h2 id="clash代理">clash代理</h2>
+<blockquote>
+<p>sudo pacman -S clash</p>
+</blockquote>
+<blockquote>
+<p>先运行一下clash下载db文件，下不动可以去dotfiles里捞</p>
+</blockquote>
+<blockquote>
+<p>更新配置文件</p>
+<p>cd .config/clash</p>
+<p>wget 代理链接 -O config.yaml</p>
+</blockquote>
+<blockquote>
+<p>设置开机自启动</p>
+<p>systemctl &ndash;user enable clash.service</p>
+</blockquote>
+<h2 id="安装fcitx5输入法">安装Fcitx5输入法</h2>
+<p>sudo pacman -S fcitx5-im fcitx5-chinese-addons</p>
+<blockquote>
+<p>另外 CN 源有词库可用：</p>
+</blockquote>
+<p>sudo pacman -S fcitx5-pinyin-{zhwiki,moegirl}</p>
+<blockquote>
+<p>支持qt和gtk安装以下依赖</p>
+</blockquote>
+<p>sudo pacman -S fcitx5-qt fcitx5-gtk</p>
+<blockquote>
+<p>主题配置参考：<a href="https://github.com/hosxy/Fcitx5-Material-Color" target="_blank" rel="noopener noreffer">fcitx5-material-color</a>，安装完成后直接用dotfiles的配置文件</p>
+</blockquote>
+<p>sudo pacman -S fcitx5-material-color</p>
+<h2 id="fontconfig">fontconfig</h2>
+<blockquote>
+<p>先在.local/share/font把需要的字体放好，再从dotfiles里捞fontconfig</p>
+</blockquote>
+<blockquote>
+<p>还有以下字体推荐安装：</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -S noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-sarasa-gothic ttf-nerd-fonts-symbols-mono ttf-opensans adobe-source-code-pro-fonts adobe-source-sans-pro-fonts adobe-source-serif-pro-fonts ttf-jetbrains-mono wqy-zenhei
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="alacritty终端">Alacritty终端</h2>
+<p>安装完成后直接从dotfiles捞配置</p>
+<h2 id="zsh">zsh</h2>
+<blockquote>
+<p>在.config/zsh下捞配置即可</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -S exa
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> plugins
+</span></span><span class="line"><span class="cl">git clone https://github.com/zdharma/fast-syntax-highlighting.git
+</span></span><span class="line"><span class="cl">git clone https://github.com/skywind3000/z.lua.git
+</span></span><span class="line"><span class="cl">git clone https://github.com/zsh-users/zsh-autosuggestions.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>新建.cache/zsh/history存放记录</p>
+</blockquote>
+<h2 id="proxychains">proxychains</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -S proxychains-ng
+</span></span><span class="line"><span class="cl">sudo vim /etc/proxychains.conf
+</span></span><span class="line"><span class="cl">最后填入socks5	127.0.0.1	<span class="m">7891</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="yarn">yarn</h2>
+<blockquote>
+<p>捞配置文件里	.yarnrc</p>
+</blockquote>
+<h2 id="neovim">neovim</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -S neovim nodejs yarn python python-neovim xsel
+</span></span><span class="line"><span class="cl">nvim :checkhealth不用管ruby<span class="o">(</span>我不用<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="plug-install">plug install</h3>
+<blockquote>
+<p>安装vim-plug：https://github.com/junegunn/vim-plug</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sh -c <span class="s1">&#39;curl -fLo &#34;${XDG_DATA_HOME:-$HOME/.local/share}&#34;/nvim/site/autoload/plug.vim --create-dirs \
+</span></span></span><span class="line"><span class="cl"><span class="s1">       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>捞dotfiles最后 :PlugInstall</p>
+</blockquote>
+<h3 id="cocnvim">coc.nvim</h3>
+<blockquote>
+<p>CocInstall coc-marketplace</p>
+<p>CocList markeyplace</p>
+<p>coc-word</p>
+<p>coc-tabnine</p>
+<p>coc-snippets</p>
+<p>coc-pairs</p>
+<p>coc-highlight</p>
+<p>coc-clangd</p>
+<p>coc-java</p>
+</blockquote>
+<h3 id="coc-java">coc-java</h3>
+<blockquote>
+<p>格式化</p>
+</blockquote>
+<blockquote>
+<p>vi rc.d/03-plugins-settings.vim 添加函数和快捷键</p>
+</blockquote>
+<p>&quot; Add <code>:Format</code> command to format current buffer.</p>
+<p>command! -nargs=0 Format :call CocAction(&lsquo;format&rsquo;)</p>
+<p>nnoremap<silent> <leader>lf :Format<CR></p>
+<blockquote>
+<p>CocCommand java.open.formatter.settings 	(需要打开一个java文件)</p>
+<p><a href="https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml" target="_blank" rel="noopener noreffer">https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml</a> 	粘贴进去</p>
+</blockquote>
+<h3 id="neoformat">neoformat</h3>
+<blockquote>
+<p>c/cpp格式化</p>
+<p>clang-format &ndash;dump-config &ndash;style=&quot;{BasedOnStyle: llvm, IndentWidth: 4}&quot; &gt; .clang-format</p>
+</blockquote>
+<blockquote>
+<p>java格式化</p>
+<p><del>sudo pacman -S astyle</del></p>
+<p><del>echo &ldquo;&ndash;style=java&rdquo; &gt; .astylerc</del></p>
+<p>(该方法效果一般，已弃用)</p>
+</blockquote>
+<blockquote>
+<p>xml格式化</p>
+<p>sudo pacman -S tidy</p>
+</blockquote>
+<h3 id="highlight">highlight</h3>
+<blockquote>
+<p>neovim 0.5版本以后使用nvim-treesitter</p>
+<p><a href="https://github.com/nvim-treesitter/nvim-treesitter" target="_blank" rel="noopener noreffer">https://github.com/nvim-treesitter/nvim-treesitter</a></p>
+</blockquote>
+<p>:TSInstall {language}</p>
+<h2 id="hexo博客恢复">hexo博客恢复</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">yarn global add hexo-cli
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> Blog
+</span></span><span class="line"><span class="cl">yarn
+</span></span><span class="line"><span class="cl">然后deasync这玩意有可能不对，重装它吧......
+</span></span><span class="line"><span class="cl">yarn add deasync
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="telegram">telegram</h2>
+<blockquote>
+<p>记得登陆之前先把TG的代理设好，TG默认是使用系统代理的</p>
+</blockquote>
+<h2 id="chrome">chrome</h2>
+<h3 id="switchyomega">SwitchyOmega</h3>
+<blockquote>
+<p>global	socks5	127.0.0.1	7891</p>
+</blockquote>
+<blockquote>
+<p>auto switch</p>
+<p>规则列表规则	global</p>
+<p>默认情景模式	直接连接</p>
+<p>AutoProxy</p>
+<p><a href="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/fullgfwlist.acl" target="_blank" rel="noopener noreffer">https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/fullgfwlist.acl</a></p>
+</blockquote>
+<h3 id="tampermonkey">Tampermonkey</h3>
+<blockquote>
+<p>全放在chrome书签栏里了</p>
+</blockquote>
+<h2 id="vscode">VSCode</h2>
+<blockquote>
+<p>插件</p>
+</blockquote>
+<ul>
+<li>
+<p>One Dark Pro</p>
+</li>
+<li>
+<p>Cloudmusic</p>
+</li>
+<li>
+<p>cpp全家桶</p>
+</li>
+<li>
+<p>java全家桶</p>
+</li>
+</ul>
+<blockquote>
+<p>字体</p>
+</blockquote>
+<ul>
+<li>&lsquo;JetBrains Mono&rsquo;,&lsquo;MesloLGS NF&rsquo;,&lsquo;Sarasa Mono SC&rsquo;,&lsquo;monospace&rsquo;,&lsquo;Droid Sans Mono&rsquo;,  monospace, &lsquo;Droid Sans Fallback&rsquo;</li>
+<li>控制字体大小 19</li>
+<li>终端字体大小 16</li>
+</ul>
+<blockquote>
+<p>主题</p>
+</blockquote>
+<ul>
+<li>Window: Title Bar Style</li>
+<li>One Dark Pro</li>
+</ul>
+<blockquote>
+<p>键映射	!!用惯了Vim实在习惯不了UpArrow / DownArrow补全!!{.danger}</p>
+</blockquote>
+<ul>
+<li>
+<p>&ldquo;key&rdquo;: &ldquo;tab&rdquo;</p>
+<p>&ldquo;command&rdquo;: &ldquo;selectNextSuggestion&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;key&rdquo;: &ldquo;shift+tab&rdquo;,
+&ldquo;command&rdquo;: &ldquo;selectPrevSuggestion&rdquo;</p>
+</li>
+</ul>
+<h2 id="maven">maven</h2>
+<blockquote>
+<p>设置镜像 vi .m2/settings.xml</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;settings&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;mirrors&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;mirror&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;id&gt;</span>nexus-tencentyun<span class="nt">&lt;/id&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;mirrorOf&gt;</span>*<span class="nt">&lt;/mirrorOf&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;name&gt;</span>Nexus tencentyun<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;url&gt;</span>
+</span></span><span class="line"><span class="cl">            http://mirrors.cloud.tencent.com/nexus/repository/maven-public/<span class="nt">&lt;/url&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/mirror&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/mirrors&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/settings&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="其他软件">其他软件</h2>
+<ul>
+<li>ImageMagick	安装后可使用display命令</li>
+<li>android-tools    安卓工具包(adb等)</li>
+</ul>
+<h1 id="美化">美化</h1>
+<blockquote>
+<p>根据自己喜好来吧，可以参考 <a href="https://www.gnome-look.org" target="_blank" rel="noopener noreffer">https://www.gnome-look.org</a></p>
+</blockquote>
+<h2 id="gnome-shell-extensions">gnome-shell-extensions</h2>
+<ul>
+<li><strong>AppIndicator and KStatusNotifierItem Support</strong> 托盘图标支持</li>
+<li><strong>ArcMenu</strong></li>
+<li><strong>Dash to Panel</strong> 在gnome40上可用</li>
+<li><strong>Dash to Dock</strong>  暂未更新gnome40</li>
+<li><strong>Espresso</strong> 小咖啡，记得把它配置里的消息提醒关了</li>
+<li><strong>Native Window Placement</strong> 缩小托盘图标间距</li>
+<li><strong>No overview at start-up</strong> 在gnome40上开机不自动overview</li>
+<li><strong>OpenWeather</strong></li>
+<li><strong>Removable Drive Menu</strong> 托盘移除U盘</li>
+<li><strong>Screenshot Tool</strong></li>
+<li><strong>Transparent Top Bar</strong></li>
+<li><strong>User Themes</strong></li>
+<li><strong>Workspace Indicator</strong> 工作区</li>
+</ul>
+<h2 id="外观">外观</h2>
+<h3 id="应用程序--shell">应用程序 &amp; Shell</h3>
+<blockquote>
+<p>aur软件先git clone，cd进入软件目录</p>
+<p>makepkg -si</p>
+</blockquote>
+<p><a href="https://aur.archlinux.org/packages/matcha-gtk-theme" target="_blank" rel="noopener noreffer">matcha-sea</a></p>
+<h3 id="光标">光标</h3>
+<blockquote>
+<p>aur软件 <a href="https://aur.archlinux.org/packages/xcursor-breeze" target="_blank" rel="noopener noreffer">xcursor-breeze</a></p>
+</blockquote>
+<h3 id="图标">图标</h3>
+<blockquote>
+<p>sudo pacman -S papirus-icon-theme</p>
+</blockquote>
+<blockquote>
+<p>aur软件 <a href="https://aur.archlinux.org/packages/papirus-folders-git" target="_blank" rel="noopener noreffer">papirus-folders-git</a></p>
+<p>papirus-folders -C teal &ndash;theme Papirus-Light</p>
+</blockquote>
+<h3 id="grub">grub</h3>
+<p><a href="https://github.com/vinceliuice/grub2-themes" target="_blank" rel="noopener noreffer">vimix-grub-theme</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/vinceliuice/grub2-themes.git
+</span></span><span class="line"><span class="cl">sudo ./install.sh -b -t vimix -i white
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="疑难问题optional">疑难问题(optional)</h1>
+<h2 id="修gdm和nvidia冲突bugfuck-nvidia">修gdm和nvidia冲突bug(Fuck NVIDIA!)</h2>
+<blockquote>
+<p>有个版本内核gdm和nvidia驱动冲突了，会卡gdm黑屏</p>
+</blockquote>
+<blockquote>
+<p>把nvidia启动写进kernel modules，提前启动</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nvim /etc/mkinitcpio.conf
+</span></span><span class="line"><span class="cl"><span class="nv">MODULES</span><span class="o">=(</span>nvidia nvidia_modeset nvidia_uvm nvidia_drm<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">HOOKS</span><span class="o">=(</span>base udev autodetect modconf block filesystems keyboard fsck<span class="o">)</span>
+</span></span><span class="line"><span class="cl">sudo nvim /etc/default/grub
+</span></span><span class="line"><span class="cl">内核参数加nvidia-drm.modeset<span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">sudo mkinitcpio -P
+</span></span><span class="line"><span class="cl">sudo grub-mkconfig -o /boot/grub/grub.cfg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="更新chrome后每个网页都崩溃">更新Chrome后每个网页都崩溃</h2>
+<ul>
+<li>系统设置里开启网络代理，手动</li>
+<li>或者sudo systemctl disable systemd-resolved(可能会导致DN42域名解析错误等等)</li>
+</ul>
+]]></description>
+</item>
+</channel>
+</rss>

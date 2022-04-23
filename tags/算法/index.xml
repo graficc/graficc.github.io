@@ -1,0 +1,70 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>算法 - 标签 - Horel&#39;s Blog</title>
+        <link>http://limbostray.github.io/tags/%E7%AE%97%E6%B3%95/</link>
+        <description>算法 - 标签 - Horel&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1494255412@mail.dlut.edu.cn (Horel)</managingEditor>
+            <webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Wed, 30 Jun 2021 22:39:00 &#43;0000</lastBuildDate><atom:link href="http://limbostray.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+    <title>牛顿迭代法求平方根</title>
+    <link>http://limbostray.github.io/posts/%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95%E6%B1%82%E5%B9%B3%E6%96%B9%E6%A0%B9/</link>
+    <pubDate>Wed, 30 Jun 2021 22:39:00 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95%E6%B1%82%E5%B9%B3%E6%96%B9%E6%A0%B9/</guid>
+    <description><![CDATA[<h1 id="牛顿迭代法求平方根">牛顿迭代法求平方根</h1>
+<p>牛顿迭代法求平方根，这种方法可以很有效地求出根号a的近似值：</p>
+<p>首先随便猜一个近似值x，然后不断令x等于x和a/x的平均数，迭代个六七次后x的值就已经相当精确了。</p>
+<blockquote>
+<p>例如，我想求根号2等于多少。假如我猜测的结果为4，虽然错的离谱，但你可以看到使用牛顿迭代法后这个值很快就趋近于根号2了：</p>
+</blockquote>
+<p>;;;info</p>
+<p>(    4 + 2/  4   ) / 2 = 2.25
+(  2.25 + 2/  2.25 ) / 2 = 1.56944..
+( 1.56944..+ 2/1.56944..) / 2 = 1.42189..
+( 1.42189..+ 2/1.42189..) / 2 = 1.41423..
+….</p>
+<p>;;;</p>
+<p></p>
+<p>原理其实很简单，我们仅仅是不断用(x,f(x))的切线来逼近方程x^2-a=0的根。</p>
+<p>根号a实际上就是x^2-a=0的一个正实根，这个函数的导数是2x。</p>
+<p>也就是说，函数上任一点(x,f(x))处的切线斜率是2x。那么，x-f(x)/(2x)就是一个比x更接近的近似值。</p>
+<p>代入f(x)=x^2-a得到x-(x^2-a)/(2x)，也就是(x+a/x)/2。</p>
+<blockquote>
+<p>java代码实现如下</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">sqrt</span><span class="o">(</span><span class="kt">double</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="o">(</span><span class="n">c</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Double</span><span class="o">.</span><span class="na">NaN</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">err</span> <span class="o">=</span> <span class="n">1e</span><span class="o">-</span><span class="n">15</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 循环条件为上一次值和这次值的差，小于一个阈值(误差范围)退出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">c</span><span class="o">/</span><span class="n">x</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">err</span> <span class="o">*</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">x</span> <span class="o">=</span> <span class="o">(</span><span class="n">c</span><span class="o">/</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="o">)</span> <span class="o">/</span> <span class="n">2</span><span class="o">.</span><span class="na">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>参考自：http://www.matrix67.com/blog/archives/361</p>
+]]></description>
+</item>
+</channel>
+</rss>

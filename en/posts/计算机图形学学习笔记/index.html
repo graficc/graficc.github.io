@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>计算机图形学——学习笔记 - Horel&#39;s Blog</title><meta name="description" content="Welcome to Horel&#39;s blog."><meta property="og:title" content="计算机图形学——学习笔记" />
+<meta property="og:description" content="计算机图形学——学习笔记 前言 :::info 终于迈出学习计算机图形学的第一步了&hellip;&hellip; ::: &#43;&#43;喜欢上计算机图形学的起因大概是听了传奇" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://limbostray.github.io/en/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-05-16T21:13:06+00:00" />
+<meta property="article:modified_time" content="2021-05-16T21:13:06+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="计算机图形学——学习笔记"/>
+<meta name="twitter:description" content="计算机图形学——学习笔记 前言 :::info 终于迈出学习计算机图形学的第一步了&hellip;&hellip; ::: &#43;&#43;喜欢上计算机图形学的起因大概是听了传奇"/>
+<meta name="application-name" content="Horel&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Horel&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://limbostray.github.io/en/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" /><link rel="prev" href="http://limbostray.github.io/en/posts/arch-linux%E6%8C%87%E5%8D%97/" /><link rel="next" href="http://limbostray.github.io/en/posts/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/" /><link rel="stylesheet" href="/css/page.min.3c64fa2243caf1a1a9f6f88aa692d72009f930caa2e1677ef98d74dc6469d3cf.css" integrity="sha256-PGT6IkPK8aGp9viKppLXIAn5MMqi4Wd&#43;&#43;Y103GRp088="><link rel="stylesheet" href="/css/home.min.1be03ad7df428f6727cc42c4c868ed4d8c551c5c2ba96602d9058d3840e29092.css" integrity="sha256-G&#43;A6199Cj2cnzELEyGjtTYxVHFwrqWYC2QWNOEDikJI="><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "计算机图形学——学习笔记",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/limbostray.github.io\/en\/posts\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0\/"
+        },"genre": "posts","keywords": "C\u002b\u002b, 计算机图形学","wordcount":  1918 ,
+        "url": "http:\/\/limbostray.github.io\/en\/posts\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0\/","datePublished": "2021-05-16T21:13:06+00:00","dateModified": "2021-05-16T21:13:06+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Horel"
+            },"description": ""
+    }
+    </script></head><body data-header-desktop="auto" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/en/" title="Horel&#39;s Blog">Horel&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/en/"> Main </a><a class="menu-item" href="/en/posts/"> Posts </a><a class="menu-item" href="/en/tags/"> Tags </a><a class="menu-item" href="/en/categories/"> Categories </a><a class="menu-item" href="/en/about/"> About </a><span class="menu-item delimiter"></span><span class="menu-item language" title="Select Language">English<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">简体中文</option><option value="/en/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" selected>English</option></select>
+                    </span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/en/" title="Horel&#39;s Blog">Horel&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/en/" title="">Main</a><a class="menu-item" href="/en/posts/" title="">Posts</a><a class="menu-item" href="/en/tags/" title="">Tags</a><a class="menu-item" href="/en/categories/" title="">Categories</a><a class="menu-item" href="/en/about/" title="">About</a><div class="menu-item"><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div><span class="menu-item language" title="Select Language">English<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">简体中文</option><option value="/en/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" selected>English</option></select>
+                </span></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="single-card" ><h2 class="single-title animated flipInX">计算机图形学——学习笔记</h2><div class="post-meta">
+                <div class="post-meta-line"><span class="post-author"><a href="https://github.com/horel" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Horel</a></span>&nbsp;<span class="post-category">published in <a href="/en/categories/"><i class="far fa-folder fa-fw"></i>Categories</a></span></div>
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-05-16">2021-05-16</time></span>&nbsp;<span><i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1918 words</span>&nbsp;
+                    <span><i class="far fa-clock fa-fw"></i>&nbsp;4 minutes</span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>Contents</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#计算机图形学学习笔记">计算机图形学——学习笔记</a></li>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#计划第一步games101-现代计算机图形学入门">计划第一步——GAMES101-现代计算机图形学入门</a>
+      <ul>
+        <li><a href="#视屏进度">视屏进度</a></li>
+        <li><a href="#作业进度">作业进度</a></li>
+        <li><a href="#笔记大纲">笔记大纲</a></li>
+      </ul>
+    </li>
+    <li><a href="#第二步fundamentals-of-computer-graphics">第二步——Fundamentals of Computer Graphics</a></li>
+    <li><a href="#学习更新记录">学习更新记录</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><h1 id="计算机图形学学习笔记">计算机图形学——学习笔记</h1>
+<h1 id="前言">前言</h1>
+<p>:::info</p>
+<p><strong>终于迈出学习计算机图形学的第一步了&hellip;&hellip;</strong></p>
+<p>:::</p>
+<p>++喜欢上计算机图形学的起因大概是听了传奇程序员==约翰·卡马克==的故事，这位推动了3D发展的大佬给我留下了无比深刻的印象。++{.dot}</p>
+<figure><a class="lightgallery" href="https://tva4.sinaimg.cn/large/008ieO5lly8gqmb5tqfs4j30go093wfi.jpg" title="约翰·卡马克" data-thumbnail="https://tva4.sinaimg.cn/large/008ieO5lly8gqmb5tqfs4j30go093wfi.jpg" data-sub-html="<h2>约翰·卡马克</h2><p>约翰·卡马克</p>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://tva4.sinaimg.cn/large/008ieO5lly8gqmb5tqfs4j30go093wfi.jpg"
+            data-srcset="https://tva4.sinaimg.cn/large/008ieO5lly8gqmb5tqfs4j30go093wfi.jpg, https://tva4.sinaimg.cn/large/008ieO5lly8gqmb5tqfs4j30go093wfi.jpg 1.5x, https://tva4.sinaimg.cn/large/008ieO5lly8gqmb5tqfs4j30go093wfi.jpg 2x"
+            data-sizes="auto"
+            alt="https://tva4.sinaimg.cn/large/008ieO5lly8gqmb5tqfs4j30go093wfi.jpg" />
+    </a><figcaption class="image-caption">约翰·卡马克</figcaption>
+    </figure>
+<p><del>再加上我对渲染、光追、VR、AR等等也都很感兴趣，就想去了解更多，于是也就有了这篇记录博客。</del>{.danger}</p>
+<h1 id="计划第一步games101-现代计算机图形学入门">计划第一步——GAMES101-现代计算机图形学入门</h1>
+<p>++计划先观看闫令琪大佬的视屏：GAMES101-现代计算机图形学入门++{.wavy}</p>
+<p>{% links %}</p>
+<ul>
+<li>site: GAMES101-现代计算机图形学入门
+owner: 闫令琪
+url: <a href="https://www.bilibili.com/video/BV1X7411F744?from=search&amp;seid=16228307511649123560" target="_blank" rel="noopener noreffer">https://www.bilibili.com/video/BV1X7411F744?from=search&seid=16228307511649123560</a>
+desc: 闫令琪
+image: <a href="https://tva4.sinaimg.cn/large/008ieO5lly8gpxh7gr2ajj308c08c3yp.jpg" target="_blank" rel="noopener noreffer">https://tva4.sinaimg.cn/large/008ieO5lly8gpxh7gr2ajj308c08c3yp.jpg</a>
+color: &ldquo;#e9546b&rdquo;
+{% endlinks %}</li>
+</ul>
+<p>编辑器当然还是用我最喜欢的VIM	!!虽然视屏里闫令琪老师极其不推荐，但我用了挺多插件，真的顺手&hellip;&hellip;.!!</p>
+<p>开发环境我决定使用实体机，<del>因为不喜欢用虚拟机，尤其是其他发行版的Linux&hellip;&hellip;</del>{.danger}</p>
+<p>视屏里的作业首先需要下载编译器和两个库，ArchLinux可以直接执行以下命令安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -S gcc make cmake eigen opencv vtk hdf5 glew
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Eigen是矩阵库，OpenCV是视觉和机器学习软件库（实测最新的版本4.x也可以）</p>
+<p>gcc是编译器，<em>CMake</em>是一个跨平台的安装（编译）工具</p>
+<p>其他部分是依赖</p>
+<p>:::success</p>
+<p><del>从入门到放弃的</del>{.danger}	<strong>进度</strong></p>
+<p>:::</p>
+<h2 id="视屏进度">视屏进度</h2>
+<p>;;;id1	P1——P5</p>
+<ul>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P1	图形学概述</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P2    线性代数回顾：点乘(方向角度)、叉乘(判断左右、内外)、矩阵(基础概念)</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P3    2D仿射变换：(线性变换)旋转、平移(水温逐渐升高)</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P4    3D变换、观测(视图、投影)、正交、透视投影(青蛙煮熟了)</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P5    三角形光栅化(采样)、缩放、平移、旋转</p>
+</li>
+</ul>
+<p>;;;</p>
+<p>;;;id1	P6——P10</p>
+<ul>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P6	 光栅化(反走样、深度缓冲)、Artifacts、先做模糊(滤波)再采样、时域的卷积=频域的乘积、MSAA(多重采样抗锯齿，同一像素增加了采样点)、FXAA(快速近似抗锯齿，不是采样，先模糊，再替换边界锯齿)、TAA(时间近似抗锯齿，复用上一帧)、Super resolution(超分辨率)、DLSS !!深度学习==猜，淦!!</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P7     可见性遮挡(深度缓存)、着色、画家算法、Z-Buffer(例如深度一样游戏会闪就是)、shading(着色不同材质)、漫反射(和观测方向无关)</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P8     Blinn-Phong着色模型、高光(半程向量和法向量是否足够接近，余弦的指数一般用100——200)、环境光(大胆假设：常数)、着色频率(每个面片、顶点、像素)、实时渲染(图形)管线、shader(着色器)、纹理映射</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P9     纹理的应用、重心坐标插值(为得到顶点间平滑的过度)、纹理贴图(纹理低分辨率时Bilinear双线性插值)、双向三阶插值(Bicubic)、纹理太大会丢失细节(又是走样!)、Mipmap(范围查询、只能近似方形)、log2 L、三线性插值(纹理内部双线性插值，Mipmap层之间插值)得到连续的图、Overblur(Mipmap用了近似)、各向异性过滤(矩形区域)</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P10    环境光照(环境光纹理)、cubemap、凹凸贴图、位移贴图、几何？？？</p>
+</li>
+</ul>
+<p>;;;</p>
+<p>;;;id1	P11——P15</p>
+<ul>
+<li>
+<p><i class="far fa-square fa-fw"></i> P11</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P12</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P13</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P14</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P15</p>
+</li>
+</ul>
+<p>;;;</p>
+<p>;;;id1	P16——P20</p>
+<ul>
+<li>
+<p><i class="far fa-square fa-fw"></i> P16</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P17</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P18</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P19</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P20</p>
+</li>
+</ul>
+<p>;;;</p>
+<p>;;;id1	P21——P23</p>
+<ul>
+<li>
+<p><i class="far fa-square fa-fw"></i> P21</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P22</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P23</p>
+</li>
+</ul>
+<p>;;;</p>
+<h2 id="作业进度">作业进度</h2>
+<ul>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> 作业0	还行，能做</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> 作业1    人类迷惑行为？代公式，懂了</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> 作业2    怀疑智商&hellip;MSAA的黑线好难改</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> 作业3</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> 作业4</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> 作业5</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> 作业6</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> 作业7</p>
+</li>
+</ul>
+<p>!!不能放弃，坚持！!!</p>
+<h2 id="笔记大纲">笔记大纲</h2>
+<ul>
+<li>Transformation 变换
+<ul>
+<li>Model 模型变换</li>
+<li>View 视图变换</li>
+<li>Projection 投影</li>
+</ul>
+</li>
+<li>Rasterization 光栅化
+<ul>
+<li>Viewport 视口变换</li>
+<li>Sample 采样</li>
+<li>Antialisaing 反走样</li>
+<li>Z-Buffering 深度缓冲</li>
+</ul>
+</li>
+<li>Shading 着色
+<ul>
+<li>
+<p>Illumination 光照(Blinn-Phong着色模型)</p>
+<ul>
+<li>Diffuse 漫反射</li>
+<li>Specular 高光</li>
+<li>Ambient 环境光</li>
+</ul>
+</li>
+<li>
+<p>shading frequencies 着色频率</p>
+<ul>
+<li>Flat shading 逐面着色</li>
+<li>Gouraud shading 逐顶点着色</li>
+<li>Phong shading 逐像素着色</li>
+</ul>
+</li>
+<li>
+<p>pipline 管线</p>
+<ul>
+<li>实时渲染管线流程</li>
+<li>shader 着色器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="第二步fundamentals-of-computer-graphics">第二步——Fundamentals of Computer Graphics</h1>
+<p>!!英文也太难啃了，看一眼就头大了!!{.bulr}</p>
+<h1 id="学习更新记录">学习更新记录</h1>
+<ul>
+<li>
+<p>!!2021-05-24!!</p>
+</li>
+<li>
+<p>!!2021-05-30!!</p>
+</li>
+</ul>
+<p>没啥好的记笔记方法，等一波小米的平板出了再继续学习。。。</p>
+<ul>
+<li>2021-06-26	重装系统忘记备份作业代码了。。。更新鸽了</li>
+<li>2021-09-18 	买了平板！可以在pdf课件上记笔记啦，方便多了！重启学习计划！</li>
+<li>2021-09-19     完成P3, Hw0</li>
+<li>2021-09-23     完成P4-5, Hw1</li>
+<li>2021-09-26     完成P6-7, Hw2 MSAA黑线问题：先渲染绿色三角形后，边界为绿色和黑色的混合。再渲染蓝色三角形时，因为只维护了像素点的深度信息，判定蓝色三角形这条边上的像素比绿色远，不进行渲染，无法覆盖绿黑边像素。解决方法：增加深度buffer大小，将所有采样点的深度信息都进行维护，这样绿色边界只有三个采样点较近，还有一个为黑色无穷远，这一个采样点被下方的蓝色同一采样点的深度信息替换。这样，两三角形的交界处的一个像素内有三个绿色采样点，一个蓝色采样点。颜色为他们的混合，3/4绿色 + 1/4蓝色。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/en/tags/c&#43;&#43;/">C&#43;&#43;</a>
+                </span><span><a href="/en/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">计算机图形学</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod">
+                <span>Updated on 2021-05-16</span>
+            </div><div class="post-info-mod"><span>
+                            <a class="link-to-markdown" href="/en/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+        </div></div><div class="post-nav"><a href="/en/posts/arch-linux%E6%8C%87%E5%8D%97/" class="prev" rel="prev" title="Arch Linux指南"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a>
+            <a href="/en/posts/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/" class="next" rel="next" title="动态分区分配算法">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.96.0">Hugo</a> | Theme - <a href="https://github.com/khusika/FeelIt" target="_blank" rel="noopener noreffer" title="FeelIt 1.0.1"><i class="fas fa-hand-holding-heart fa-fw"></i> FeelIt</a>
+        </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/horel">Horel</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('/sw.min.js?version=1.0.1', { scope: '/' })
+        .then(() => {
+            console.info('Horel\u0027s Blog\u00A0Service Worker Registered');
+        }, err => console.error('Horel\u0027s Blog\u00A0Service Worker registration failed: ', err));
+
+    navigator.serviceWorker
+        .ready
+        .then(() => {
+            console.info('Horel\u0027s Blog\u00A0Service Worker Ready');
+        });
+}
+</script>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a></div><link rel="stylesheet" href="/lib/fontawesome-free/all.min.99464ceb71bc9bbdcc72275faefe44f98eb5cbb6b5d8ee665b87b35376f1a96e.css" integrity="sha256-mUZM63G8m73Mcidfrv5E&#43;Y61y7a12O5mW4ezU3bxqW4="><link rel="stylesheet" href="/lib/animate/animate.min.df71851d4db7fd1f4289c30b3ea677bb3c82e84ae317f0ed908cc8efe8cdc5eb.css" integrity="sha256-33GFHU23/R9CicMLPqZ3uzyC6ErjF/DtkIzI7&#43;jNxes="><link rel="stylesheet" href="/lib/katex/katex.min.e790dd738ed6bd64cae6f6157a39c0b922bb51225a2fb1505ebcd0e07890d566.css" integrity="sha256-55Ddc47WvWTK5vYVejnAuSK7USJaL7FQXrzQ4HiQ1WY="><link rel="stylesheet" href="/lib/katex/copy-tex.min.fa822dbe23da4e6aa30e1938cb87cb2d420c8114180d5fd9cab44dbd089e6d63.css" integrity="sha256-&#43;oItviPaTmqjDhk4y4fLLUIMgRQYDV/ZyrRNvQiebWM="><script src="/lib/autocomplete/autocomplete.min.5a3d06d1b1f501f2093b356eda8275778f948abbf611429866909e5589f12b46.js" integrity="sha256-Wj0G0bH1AfIJOzVu2oJ1d4&#43;Uirv2EUKYZpCeVYnxK0Y="></script><script src="/lib/algoliasearch/algoliasearch-lite.umd.min.2f033af4f644e0d220415d75f5a477838c5ec2bbb6adb30ddef6c21bde177440.js" integrity="sha256-LwM69PZE4NIgQV119aR3g4xewru2rbMN3vbCG94XdEA="></script><script src="/lib/lazysizes/lazysizes.min.7d35b4cbabcbdce184ea0d2224d452da34974dab0144d65c82ed428fb4ed343e.js" integrity="sha256-fTW0y6vL3OGE6g0iJNRS2jSXTasBRNZcgu1Cj7TtND4="></script><script src="/lib/clipboard/clipboard.min.8b1d1a31ffc3c9401a9dd809fcda5faa792f32d736cef393ee7a3646f7522d50.js" integrity="sha256-ix0aMf/DyUAandgJ/NpfqnkvMtc2zvOT7no2RvdSLVA="></script><script src="/lib/katex/katex.min.a9525e779e5807afad67d2f3274c5565302b70cc365d7c6315e791204526c0e9.js" integrity="sha256-qVJed55YB6&#43;tZ9LzJ0xVZTArcMw2XXxjFeeRIEUmwOk="></script><script src="/lib/katex/auto-render.min.1b9ddb6192ce6db4cb4c0de3ef4c5118f2b12989416f3bc367bf3d07ab121641.js" integrity="sha256-G53bYZLObbTLTA3j70xRGPKxKYlBbzvDZ789B6sSFkE="></script><script src="/lib/katex/copy-tex.min.7ad4aa6d2545e3e2f07bc30693f55a9dcd6c47e996bfea8e1bbddfc56c3da7de.js" integrity="sha256-etSqbSVF4&#43;Lwe8MGk/Vanc1sR&#43;mWv&#43;qOG73fxWw9p94="></script><script src="/lib/katex/mhchem.min.add54727de824e382d0922469c067386bbc13a494c07d8cdd41ea8ca0e49f2e5.js" integrity="sha256-rdVHJ96CTjgtCSJGnAZzhrvBOklMB9jN1B6oyg5J8uU="></script><script src="/sw.min.b956a22da9a0d901262abd05682c504f83cb461b4494ea022edbdf4a36d5e088.js" integrity="sha256-uVaiLamg2QEmKr0FaCxQT4PLRhtElOoCLtvfSjbV4Ig="></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"JLSXOSCBYN","algoliaIndex":"horel_io","algoliaSearchKey":"44c6685d5b1572458f71fa76f52cff67","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"algolia"}};</script><script src="/js/theme.min.e3cf17cec3867a0cf5860cc48b1f7f2c1716cffe24730e67e8eca9cde52f9cd4.js" integrity="sha256-488XzsOGegz1hgzEix9/LBcWz/4kcw5n6OypzeUvnNQ="></script></body></html>
