@@ -42,12 +42,9 @@
         "objectID": "posts/Arch-Linux指南.en",
         "comment": false,
         "categories": [
-            [
-                "二进制玄学"
-            ]
+            "Linux"
         ],
         "tags": [
-            "教程",
             "Linux"
         ],
         "sticky": true,
@@ -60,12 +57,9 @@
         "objectID": "posts/Arch-Linux指南",
         "comment": false,
         "categories": [
-            [
-                "二进制玄学"
-            ]
+            "Linux"
         ],
         "tags": [
-            "教程",
             "Linux"
         ],
         "sticky": true,
@@ -78,9 +72,7 @@
         "objectID": "posts/CMake-Example.en",
         "comment": false,
         "categories": [
-            [
-                "二进制玄学"
-            ]
+            "C++"
         ],
         "tags": [
             "C++"
@@ -95,9 +87,7 @@
         "objectID": "posts/CMake-Example",
         "comment": false,
         "categories": [
-            [
-                "二进制玄学"
-            ]
+            "C++"
         ],
         "tags": [
             "C++"
@@ -112,13 +102,11 @@
         "objectID": "posts/动态分区分配算法.en",
         "comment": false,
         "categories": [
-            [
-                "二进制玄学"
-            ]
+            "算法"
         ],
         "tags": [
-            "操作系统",
-            "C++"
+            "C++",
+            "算法"
         ],
         "date": "2021-06-12T20:21:58.000Z",
         "cover": null
@@ -130,13 +118,11 @@
         "objectID": "posts/动态分区分配算法",
         "comment": false,
         "categories": [
-            [
-                "二进制玄学"
-            ]
+            "算法"
         ],
         "tags": [
-            "操作系统",
-            "C++"
+            "C++",
+            "算法"
         ],
         "date": "2021-06-12T20:21:58.000Z",
         "cover": null
@@ -148,9 +134,7 @@
         "objectID": "posts/牛顿迭代法求平方根.en",
         "comment": false,
         "categories": [
-            [
-                "二进制玄学"
-            ]
+            "算法"
         ],
         "tags": [
             "算法"
@@ -165,9 +149,7 @@
         "objectID": "posts/牛顿迭代法求平方根",
         "comment": false,
         "categories": [
-            [
-                "二进制玄学"
-            ]
+            "算法"
         ],
         "tags": [
             "算法"
@@ -182,9 +164,7 @@
         "objectID": "posts/计算机图形学——学习笔记.en",
         "comment": false,
         "categories": [
-            [
-                "二进制玄学"
-            ]
+            "计算机图形学"
         ],
         "tags": [
             "C++",
@@ -201,9 +181,7 @@
         "objectID": "posts/计算机图形学——学习笔记",
         "comment": false,
         "categories": [
-            [
-                "二进制玄学"
-            ]
+            "计算机图形学"
         ],
         "tags": [
             "C++",
@@ -220,9 +198,7 @@
         "objectID": "posts/透视投影.en",
         "comment": false,
         "categories": [
-            [
-                "二进制玄学"
-            ]
+            "计算机图形学"
         ],
         "tags": [
             "计算机图形学"
@@ -237,9 +213,7 @@
         "objectID": "posts/透视投影",
         "comment": false,
         "categories": [
-            [
-                "二进制玄学"
-            ]
+            "计算机图形学"
         ],
         "tags": [
             "计算机图形学"

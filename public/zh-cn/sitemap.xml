@@ -11,7 +11,7 @@
                     hreflang="zh-cn"
                     href="http://limbostray.github.io/about/"
                     /></url><url>
-            <loc>http://limbostray.github.io/tags/c&#43;&#43;/</loc><lastmod>2021-11-21T21:09:34&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>http://limbostray.github.io/tags/c&#43;&#43;/</loc><lastmod>2022-04-23T20:20:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="http://limbostray.github.io/en/tags/c&#43;&#43;/"
@@ -20,7 +20,25 @@
                     hreflang="zh-cn"
                     href="http://limbostray.github.io/tags/c&#43;&#43;/"
                     /></url><url>
-            <loc>http://limbostray.github.io/posts/cmake-example/</loc><lastmod>2021-11-21T21:09:34&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>http://limbostray.github.io/categories/c&#43;&#43;/</loc><lastmod>2022-04-23T20:20:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="http://limbostray.github.io/en/categories/c&#43;&#43;/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="http://limbostray.github.io/categories/c&#43;&#43;/"
+                    /></url><url>
+            <loc>http://limbostray.github.io/categories/</loc><lastmod>2022-04-23T20:20:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="http://limbostray.github.io/en/categories/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="http://limbostray.github.io/categories/"
+                    /></url><url>
+            <loc>http://limbostray.github.io/posts/cmake-example/</loc><lastmod>2022-04-23T20:20:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="http://limbostray.github.io/en/posts/cmake-example/"
@@ -29,7 +47,7 @@
                     hreflang="zh-cn"
                     href="http://limbostray.github.io/posts/cmake-example/"
                     /></url><url>
-            <loc>http://limbostray.github.io/</loc><lastmod>2021-11-21T21:09:34&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>http://limbostray.github.io/</loc><lastmod>2022-04-23T20:20:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="http://limbostray.github.io/en/"
@@ -38,7 +56,7 @@
                     hreflang="zh-cn"
                     href="http://limbostray.github.io/"
                     /></url><url>
-            <loc>http://limbostray.github.io/posts/</loc><lastmod>2021-11-21T21:09:34&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>http://limbostray.github.io/posts/</loc><lastmod>2022-04-23T20:20:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="http://limbostray.github.io/en/posts/"
@@ -47,7 +65,7 @@
                     hreflang="zh-cn"
                     href="http://limbostray.github.io/posts/"
                     /></url><url>
-            <loc>http://limbostray.github.io/tags/</loc><lastmod>2021-11-21T21:09:34&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>http://limbostray.github.io/tags/</loc><lastmod>2022-04-23T20:20:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="http://limbostray.github.io/en/tags/"
@@ -64,6 +82,15 @@
                     rel="alternate"
                     hreflang="zh-cn"
                     href="http://limbostray.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"
+                    /></url><url>
+            <loc>http://limbostray.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/</loc><lastmod>2021-10-31T13:26:47&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="http://limbostray.github.io/en/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="http://limbostray.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"
                     /></url><url>
             <loc>http://limbostray.github.io/posts/%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1/</loc><lastmod>2021-10-31T13:26:47&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
@@ -92,6 +119,15 @@
                     hreflang="zh-cn"
                     href="http://limbostray.github.io/tags/%E7%AE%97%E6%B3%95/"
                     /></url><url>
+            <loc>http://limbostray.github.io/categories/%E7%AE%97%E6%B3%95/</loc><lastmod>2021-06-30T22:39:00&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="http://limbostray.github.io/en/categories/%E7%AE%97%E6%B3%95/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="http://limbostray.github.io/categories/%E7%AE%97%E6%B3%95/"
+                    /></url><url>
             <loc>http://limbostray.github.io/posts/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/</loc><lastmod>2021-06-12T20:21:58&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
@@ -100,15 +136,6 @@
                     rel="alternate"
                     hreflang="zh-cn"
                     href="http://limbostray.github.io/posts/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/"
-                    /></url><url>
-            <loc>http://limbostray.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc><lastmod>2021-06-12T20:21:58&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="http://limbostray.github.io/en/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-cn"
-                    href="http://limbostray.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"
                     /></url><url>
             <loc>http://limbostray.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc><lastmod>2021-05-16T21:13:06&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
@@ -137,22 +164,13 @@
                     hreflang="zh-cn"
                     href="http://limbostray.github.io/tags/linux/"
                     /></url><url>
-            <loc>http://limbostray.github.io/tags/%E6%95%99%E7%A8%8B/</loc><lastmod>2021-04-26T22:50:04&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
+            <loc>http://limbostray.github.io/categories/linux/</loc><lastmod>2021-04-26T22:50:04&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
-                        href="http://limbostray.github.io/en/tags/%E6%95%99%E7%A8%8B/"
+                        href="http://limbostray.github.io/en/categories/linux/"
                         /><xhtml:link
                     rel="alternate"
                     hreflang="zh-cn"
-                    href="http://limbostray.github.io/tags/%E6%95%99%E7%A8%8B/"
-                    /></url><url>
-            <loc>http://limbostray.github.io/categories/</loc><changefreq>weekly</changefreq><priority>0.5</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="http://limbostray.github.io/en/categories/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-cn"
-                    href="http://limbostray.github.io/categories/"
+                    href="http://limbostray.github.io/categories/linux/"
                     /></url><url>
             <loc>http://limbostray.github.io/offline/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>

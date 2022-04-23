@@ -1,8 +1,7 @@
 ---
 title: CMake Example
 comment: false
-categories:
-  - [二进制玄学]
+categories: ["C++"]
 tags:
   - C++
 date: 2021-11-21 21:09:34

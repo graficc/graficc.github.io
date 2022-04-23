@@ -1,10 +1,8 @@
 ---
 title: Arch Linux指南
 comment: false
-categories:
-  - [二进制玄学]
+categories: ["Linux"]
 tags:
-  - 教程
   - Linux
 sticky: true
 date: 2021-04-26 22:50:04
