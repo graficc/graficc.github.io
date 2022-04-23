@@ -1,0 +1,324 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>计算机图形学 - 标签 - Horel&#39;s Blog</title>
+        <link>http://limbostray.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/</link>
+        <description>计算机图形学 - 标签 - Horel&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1494255412@mail.dlut.edu.cn (Horel)</managingEditor>
+            <webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Sun, 31 Oct 2021 13:26:47 &#43;0000</lastBuildDate><atom:link href="http://limbostray.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="self" type="application/rss+xml" /><item>
+    <title>透视投影</title>
+    <link>http://limbostray.github.io/posts/%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1/</link>
+    <pubDate>Sun, 31 Oct 2021 13:26:47 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1/</guid>
+    <description><![CDATA[<h1 id="对透视投影的深入思考">对透视投影的深入思考</h1>
+<p>投影变换是整个渲染管线里，设计得最复杂的，也最巧妙的一次变换。</p>
+<h1 id="前因">前因</h1>
+<p>在GAMES101中，我只是大概了解了透视投影矩阵所做出的变换，将视椎体中的点全部映射到近平面上，再将近平面缩放成规则观察体(CVV空间)。</p>
+<p>而在tinyrenderer中，我见到了不一样的透视投影矩阵。</p>
+<p>关于透视投影的插值矫正，tinyrenderer直接忽略了这点，GAMES101中也没有做更详细的讲解，以至于我在看到透视除法等一系列操作时摸不到头脑。</p>
+<p>于是，我去开始查找资料，为什么要做透视投影的插值矫正？但网上得到的答案大多都很简短、类似。类似于：重心坐标插值要在线性空间中插值，世界空间、观察空间中的坐标都是线性的，而经过透视投影变换后，是非线性的。于是以屏幕坐标插值出的结果是畸形的，当线性坐标下(例如观察坐标)的插值结果才是正确的。</p>
+<p>这番解释虽然大概说明了要做透视插值矫正的必要性，但距离实际应用还是一头雾水。我到底该怎么从屏幕坐标这个非线性空间，插值得到线性空间坐标？透视投影变换的步骤究竟是什么？透视除法除以的w分量又究竟是什么，为什么要这么做？</p>
+<p>于是，我展开了深入的理解。</p>
+<h1 id="理解前的统一定义">理解前的统一定义</h1>
+<p>首先，为了统一坐标系、矩阵等问题，我会从以下方式思考：</p>
+<ul>
+<li>向量默认为列向量</li>
+<li>矩阵默认为列主序</li>
+<li>变换默认为矩阵左乘</li>
+<li>坐标系默认为右手系</li>
+<li>摄像机默认处于原点，lookat方向-z，向上方向+y</li>
+</ul>
+<h1 id="投影变换的目的">投影变换的目的</h1>
+<p>坐标转换到观察空间后，由于直接使用摄像机的平截头体进行裁剪比较复杂（平截头体的边界方程求交困难），所以需要将其转化到裁剪空间（<strong>Clip空间</strong> ）。</p>
+<p><strong>从观察空间到裁剪空间的变换</strong>叫做<strong>投影变换</strong>。Project</p>
+<p>裁剪空间变换的思路是，对视椎体进行缩放，使远裁剪面缩放至近裁剪面大小，然后将这个长方体缩放至标准立方体移动到原点，使坐标的w分量表示裁剪范围，此时，只需要简单的比较x,y,z和w分量的大小即可裁剪图元。</p>
+<p>虽然叫做投影变换，但是投影变换并没有进行真正的投影。</p>
+<p>这一篇主要讲透视投影</p>
+<h1 id="透视投影变换步骤">透视投影变换步骤</h1>
+<ol>
+<li>从视椎体内一点投影到近裁剪面</li>
+<li>由近裁剪面缩放至规则观察体(CVV空间)，得到clip坐标(此时clip坐标还没有除以w变成3D坐标，仍是齐次坐标)</li>
+</ol>
+<p>对相机空间中的顶点，如果在视锥体中，则变换后就在CVV中。如果在视锥体外，变换后就在CVV外。CVV本身的规则性对于多边形的裁剪很有利。</p>
+<h1 id="透视投影简易模型理解">透视投影简易模型理解</h1>
+<p>首先，我们明确我们的需求：将观察空间中视椎体中的坐标点 (x, y, z, 1)，通过透视投影，转化到近平面上的点 (x&rsquo;, y&rsquo;, z&rsquo;, 1) 中去。</p>
+<p></p>
+<p>那么我们可以很简单的得到 z&rsquo; = Near，那么由于近平面值Near是固定的，先不妨假设为1，则</p>
+<p>由相似三角形可得：</p>
+<ul>
+<li>z&rsquo; = 1 	 （z&rsquo; = Near）</li>
+<li>x&rsquo; = x/z   （x&rsquo; = x * Near / z）</li>
+<li>y&rsquo; = y/z   （y&rsquo; = y * Near / z）</li>
+<li>w = 1</li>
+</ul>
+<p>那么就可以推出tinyrenderer中的透视矩阵：</p>
+<p></p>
+<blockquote>
+<p>因采用右手系，这里红色的1应该是-1</p>
+<p>注意到M的最后一行不是(0 0 0 1)而是(0 0 -1 0)，因此可以看出透视变换不是一种仿射变换，它是非线性的。</p>
+</blockquote>
+<p>经过这个矩阵变换，就可以得到(x&rsquo; = x, y&rsquo; = y, z&rsquo; = z, w&rsquo; = z)，经过齐次除法，xy映射到x&rsquo; = x/z，y&rsquo; = y/z，z&rsquo; = 1。这正是我们想要的变换。</p>
+<p>我们将透视投影变换的系数储存在了w分量里，只要进行透视除法，就是非线性的(x&rsquo;, y&rsquo;, z&rsquo;)坐标，而不考虑w分量，(x, y, z)仍是线性可插值的。</p>
+<h1 id="数学推导">数学推导</h1>
+<p></p>
+<p>推荐看这篇文章：<a href="https://blog.csdn.net/n5/article/details/100148540" target="_blank" rel="noopener noreffer">图形学基础之透视校正插值</a></p>
+<p>经过推导，我们发现：</p>
+<p>当我们从视角空间到透视投影到屏幕空间后，我们的线性变换并不是x, y, z的线性变换，而是x, y, <strong>1/z</strong>的线性变换。因此在屏幕空间上的插值需要做透视校正，否则会出现不正确的情况。</p>
+<p>为什么是<strong>1/z</strong>的线性变换呢，在透视投影中，我们的视椎体是一个不规则立方体，将点(x, y, z)中的x, y映射到屏幕(近平面)上时会根据其z的值进行压缩，其公式是：</p>
+<ul>
+<li>x&rsquo; = Near/z * x</li>
+<li>y&rsquo; = Near/z * y</li>
+</ul>
+<p>可以发现x&rsquo;, y&rsquo;和x, y的关系是1/z的关系。</p>
+<p>在齐次坐标中  ，因此我们将z保存在w的位置，将x, y, z在透视投影下的线性变换都<strong>乘以z</strong>。这样 </p>
+<p>就是关于x, y, z的线性变换。</p>
+<p>因此所谓的透视除法，就是在透视投影后还原x, y, z真实的屏幕空间值的过程。</p>
+<h1 id="真实模型理解">真实模型理解</h1>
+<p>下面来看看网上最常见的透视矩阵书写形式：</p>
+<p></p>
+<p>其实这么写反而妨碍了我们的直观理解，由Aspect、Fov与w（width）、h（height）、N（Near）、F（Far）的关系，我们<strong>应当</strong>写成如下形式：</p>
+<p></p>
+<p>发现了吗，和透视矩阵之母Pure Perspective Projection的区别，第一列第一行的1变为了N*（2/w）这么一个缩放值。</p>
+<p>2/w很好理解，是将近平面的宽缩放到长度2；</p>
+<p>乘上N ，是因为考虑到齐次除法xyz分量要除以w分量，矩阵转化后的w分量等于转化前的z分量相反数。</p>
+<p>故x&rsquo;/w&rsquo;= x/z, y&rsquo;/w&rsquo; = y/z,是我们要的投影到近平面为1的值，这个值乘上N就相当于映射到了近平面，即true x’ =（N/z）*（2/w）。 相应的，mat11的值1变化为2N/h。</p>
+<h1 id="总结">总结</h1>
+<p>关于透视投影的矫正，通过将原始的z值存储在w分量中。</p>
+<p>透视校正插值使用<strong>线性的深度值</strong>和<strong>非线性空间下的插值系数s</strong>来计算出线性空间下的插值系数t，并用t来对顶点属性进行插值。</p>
+<p>最后得到的(x&rsquo;, y&rsquo;, z&rsquo;, w)中，x‘、y’已经是xy乘过Near了，再除以z不就是屏幕空间吗。</p>
+<ul>
+<li>x&rsquo; = x * Near / z</li>
+<li>y&rsquo; = y * Near / z</li>
+<li>z = Near</li>
+<li>w = 1</li>
+</ul>
+]]></description>
+</item>
+<item>
+    <title>计算机图形学——学习笔记</title>
+    <link>http://limbostray.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+    <pubDate>Sun, 16 May 2021 21:13:06 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+    <description><![CDATA[<h1 id="计算机图形学学习笔记">计算机图形学——学习笔记</h1>
+<h1 id="前言">前言</h1>
+<p>:::info</p>
+<p><strong>终于迈出学习计算机图形学的第一步了&hellip;&hellip;</strong></p>
+<p>:::</p>
+<p>++喜欢上计算机图形学的起因大概是听了传奇程序员==约翰·卡马克==的故事，这位推动了3D发展的大佬给我留下了无比深刻的印象。++{.dot}</p>
+<p><figure><a class="lightgallery" href="https://tva4.sinaimg.cn/large/008ieO5lly8gqmb5tqfs4j30go093wfi.jpg" title="约翰·卡马克" data-thumbnail="https://tva4.sinaimg.cn/large/008ieO5lly8gqmb5tqfs4j30go093wfi.jpg" data-sub-html="<h2>约翰·卡马克</h2><p>约翰·卡马克</p>">
+        
+    </a><figcaption class="image-caption">约翰·卡马克</figcaption>
+    </figure></p>
+<p><del>再加上我对渲染、光追、VR、AR等等也都很感兴趣，就想去了解更多，于是也就有了这篇记录博客。</del>{.danger}</p>
+<h1 id="计划第一步games101-现代计算机图形学入门">计划第一步——GAMES101-现代计算机图形学入门</h1>
+<p>++计划先观看闫令琪大佬的视屏：GAMES101-现代计算机图形学入门++{.wavy}</p>
+<p>{% links %}</p>
+<ul>
+<li>site: GAMES101-现代计算机图形学入门
+owner: 闫令琪
+url: <a href="https://www.bilibili.com/video/BV1X7411F744?from=search&amp;seid=16228307511649123560" target="_blank" rel="noopener noreffer">https://www.bilibili.com/video/BV1X7411F744?from=search&seid=16228307511649123560</a>
+desc: 闫令琪
+image: <a href="https://tva4.sinaimg.cn/large/008ieO5lly8gpxh7gr2ajj308c08c3yp.jpg" target="_blank" rel="noopener noreffer">https://tva4.sinaimg.cn/large/008ieO5lly8gpxh7gr2ajj308c08c3yp.jpg</a>
+color: &ldquo;#e9546b&rdquo;
+{% endlinks %}</li>
+</ul>
+<p>编辑器当然还是用我最喜欢的VIM	!!虽然视屏里闫令琪老师极其不推荐，但我用了挺多插件，真的顺手&hellip;&hellip;.!!</p>
+<p>开发环境我决定使用实体机，<del>因为不喜欢用虚拟机，尤其是其他发行版的Linux&hellip;&hellip;</del>{.danger}</p>
+<p>视屏里的作业首先需要下载编译器和两个库，ArchLinux可以直接执行以下命令安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pacman -S gcc make cmake eigen opencv vtk hdf5 glew
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Eigen是矩阵库，OpenCV是视觉和机器学习软件库（实测最新的版本4.x也可以）</p>
+<p>gcc是编译器，<em>CMake</em>是一个跨平台的安装（编译）工具</p>
+<p>其他部分是依赖</p>
+<p>:::success</p>
+<p><del>从入门到放弃的</del>{.danger}	<strong>进度</strong></p>
+<p>:::</p>
+<h2 id="视屏进度">视屏进度</h2>
+<p>;;;id1	P1——P5</p>
+<ul>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P1	图形学概述</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P2    线性代数回顾：点乘(方向角度)、叉乘(判断左右、内外)、矩阵(基础概念)</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P3    2D仿射变换：(线性变换)旋转、平移(水温逐渐升高)</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P4    3D变换、观测(视图、投影)、正交、透视投影(青蛙煮熟了)</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P5    三角形光栅化(采样)、缩放、平移、旋转</p>
+</li>
+</ul>
+<p>;;;</p>
+<p>;;;id1	P6——P10</p>
+<ul>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P6	 光栅化(反走样、深度缓冲)、Artifacts、先做模糊(滤波)再采样、时域的卷积=频域的乘积、MSAA(多重采样抗锯齿，同一像素增加了采样点)、FXAA(快速近似抗锯齿，不是采样，先模糊，再替换边界锯齿)、TAA(时间近似抗锯齿，复用上一帧)、Super resolution(超分辨率)、DLSS !!深度学习==猜，淦!!</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P7     可见性遮挡(深度缓存)、着色、画家算法、Z-Buffer(例如深度一样游戏会闪就是)、shading(着色不同材质)、漫反射(和观测方向无关)</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P8     Blinn-Phong着色模型、高光(半程向量和法向量是否足够接近，余弦的指数一般用100——200)、环境光(大胆假设：常数)、着色频率(每个面片、顶点、像素)、实时渲染(图形)管线、shader(着色器)、纹理映射</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> P9     纹理的应用、重心坐标插值(为得到顶点间平滑的过度)、纹理贴图(纹理低分辨率时Bilinear双线性插值)、双向三阶插值(Bicubic)、纹理太大会丢失细节(又是走样!)、Mipmap(范围查询、只能近似方形)、log2 L、三线性插值(纹理内部双线性插值，Mipmap层之间插值)得到连续的图、Overblur(Mipmap用了近似)、各向异性过滤(矩形区域)</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P10    环境光照(环境光纹理)、cubemap、凹凸贴图、位移贴图、几何？？？</p>
+</li>
+</ul>
+<p>;;;</p>
+<p>;;;id1	P11——P15</p>
+<ul>
+<li>
+<p><i class="far fa-square fa-fw"></i> P11</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P12</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P13</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P14</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P15</p>
+</li>
+</ul>
+<p>;;;</p>
+<p>;;;id1	P16——P20</p>
+<ul>
+<li>
+<p><i class="far fa-square fa-fw"></i> P16</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P17</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P18</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P19</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P20</p>
+</li>
+</ul>
+<p>;;;</p>
+<p>;;;id1	P21——P23</p>
+<ul>
+<li>
+<p><i class="far fa-square fa-fw"></i> P21</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P22</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> P23</p>
+</li>
+</ul>
+<p>;;;</p>
+<h2 id="作业进度">作业进度</h2>
+<ul>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> 作业0	还行，能做</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> 作业1    人类迷惑行为？代公式，懂了</p>
+</li>
+<li>
+<p><i class="far fa-check-square fa-fw"></i> 作业2    怀疑智商&hellip;MSAA的黑线好难改</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> 作业3</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> 作业4</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> 作业5</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> 作业6</p>
+</li>
+<li>
+<p><i class="far fa-square fa-fw"></i> 作业7</p>
+</li>
+</ul>
+<p>!!不能放弃，坚持！!!</p>
+<h2 id="笔记大纲">笔记大纲</h2>
+<ul>
+<li>Transformation 变换
+<ul>
+<li>Model 模型变换</li>
+<li>View 视图变换</li>
+<li>Projection 投影</li>
+</ul>
+</li>
+<li>Rasterization 光栅化
+<ul>
+<li>Viewport 视口变换</li>
+<li>Sample 采样</li>
+<li>Antialisaing 反走样</li>
+<li>Z-Buffering 深度缓冲</li>
+</ul>
+</li>
+<li>Shading 着色
+<ul>
+<li>
+<p>Illumination 光照(Blinn-Phong着色模型)</p>
+<ul>
+<li>Diffuse 漫反射</li>
+<li>Specular 高光</li>
+<li>Ambient 环境光</li>
+</ul>
+</li>
+<li>
+<p>shading frequencies 着色频率</p>
+<ul>
+<li>Flat shading 逐面着色</li>
+<li>Gouraud shading 逐顶点着色</li>
+<li>Phong shading 逐像素着色</li>
+</ul>
+</li>
+<li>
+<p>pipline 管线</p>
+<ul>
+<li>实时渲染管线流程</li>
+<li>shader 着色器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="第二步fundamentals-of-computer-graphics">第二步——Fundamentals of Computer Graphics</h1>
+<p>!!英文也太难啃了，看一眼就头大了!!{.bulr}</p>
+<h1 id="学习更新记录">学习更新记录</h1>
+<ul>
+<li>
+<p>!!2021-05-24!!</p>
+</li>
+<li>
+<p>!!2021-05-30!!</p>
+</li>
+</ul>
+<p>没啥好的记笔记方法，等一波小米的平板出了再继续学习。。。</p>
+<ul>
+<li>2021-06-26	重装系统忘记备份作业代码了。。。更新鸽了</li>
+<li>2021-09-18 	买了平板！可以在pdf课件上记笔记啦，方便多了！重启学习计划！</li>
+<li>2021-09-19     完成P3, Hw0</li>
+<li>2021-09-23     完成P4-5, Hw1</li>
+<li>2021-09-26     完成P6-7, Hw2 MSAA黑线问题：先渲染绿色三角形后，边界为绿色和黑色的混合。再渲染蓝色三角形时，因为只维护了像素点的深度信息，判定蓝色三角形这条边上的像素比绿色远，不进行渲染，无法覆盖绿黑边像素。解决方法：增加深度buffer大小，将所有采样点的深度信息都进行维护，这样绿色边界只有三个采样点较近，还有一个为黑色无穷远，这一个采样点被下方的蓝色同一采样点的深度信息替换。这样，两三角形的交界处的一个像素内有三个绿色采样点，一个蓝色采样点。颜色为他们的混合，3/4绿色 + 1/4蓝色。</li>
+</ul>
+]]></description>
+</item>
+</channel>
+</rss>
