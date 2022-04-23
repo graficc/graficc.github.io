@@ -13,4 +13,4 @@ git status
 sleep 1s
 git commit -m "$1"
 sleep 0.5s
-git push origin main << limbostray << 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
+expect -c "spawn git push origin main; expect "*Username*" { send "limbostray"; exp_continue } "*Password*" { send "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"}; interact"
