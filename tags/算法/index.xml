@@ -1,13 +1,13 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>算法 - 标签 - Horel&#39;s Blog</title>
-        <link>http://limbostray.github.io/tags/%E7%AE%97%E6%B3%95/</link>
+        <link>http://graficc.github.io/tags/%E7%AE%97%E6%B3%95/</link>
         <description>算法 - 标签 - Horel&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1494255412@mail.dlut.edu.cn (Horel)</managingEditor>
-            <webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Wed, 30 Jun 2021 22:39:00 &#43;0000</lastBuildDate><atom:link href="http://limbostray.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Wed, 30 Jun 2021 22:39:00 &#43;0000</lastBuildDate><atom:link href="http://graficc.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
     <title>牛顿迭代法求平方根</title>
-    <link>http://limbostray.github.io/posts/%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95%E6%B1%82%E5%B9%B3%E6%96%B9%E6%A0%B9/</link>
-    <pubDate>Wed, 30 Jun 2021 22:39:00 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95%E6%B1%82%E5%B9%B3%E6%96%B9%E6%A0%B9/</guid>
+    <link>http://graficc.github.io/posts/%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95%E6%B1%82%E5%B9%B3%E6%96%B9%E6%A0%B9/</link>
+    <pubDate>Wed, 30 Jun 2021 22:39:00 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://graficc.github.io/posts/%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95%E6%B1%82%E5%B9%B3%E6%96%B9%E6%A0%B9/</guid>
     <description><![CDATA[<h1 id="牛顿迭代法求平方根">牛顿迭代法求平方根</h1>
 <p>牛顿迭代法求平方根，这种方法可以很有效地求出根号a的近似值：</p>
 <p>首先随便猜一个近似值x，然后不断令x等于x和a/x的平均数，迭代个六七次后x的值就已经相当精确了。</p>
@@ -68,8 +68,8 @@
 </item>
 <item>
     <title>动态分区分配算法</title>
-    <link>http://limbostray.github.io/posts/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/</link>
-    <pubDate>Sat, 12 Jun 2021 20:21:58 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/</guid>
+    <link>http://graficc.github.io/posts/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/</link>
+    <pubDate>Sat, 12 Jun 2021 20:21:58 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://graficc.github.io/posts/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[<ul>
 <li>首次适应算法FF</li>
 <li>循环首次适应算法NF</li>

@@ -61,4 +61,4 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
-Sitemap: http://limbostray.github.io/sitemap.xml
+Sitemap: http://graficc.github.io/sitemap.xml

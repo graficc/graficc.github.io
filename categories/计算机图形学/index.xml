@@ -1,13 +1,13 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>计算机图形学 - 分类 - Horel&#39;s Blog</title>
-        <link>http://limbostray.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/</link>
+        <link>http://graficc.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/</link>
         <description>计算机图形学 - 分类 - Horel&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1494255412@mail.dlut.edu.cn (Horel)</managingEditor>
-            <webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Sun, 31 Oct 2021 13:26:47 &#43;0000</lastBuildDate><atom:link href="http://limbostray.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Sun, 31 Oct 2021 13:26:47 &#43;0000</lastBuildDate><atom:link href="http://graficc.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/" rel="self" type="application/rss+xml" /><item>
     <title>透视投影</title>
-    <link>http://limbostray.github.io/posts/%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1/</link>
-    <pubDate>Sun, 31 Oct 2021 13:26:47 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1/</guid>
+    <link>http://graficc.github.io/posts/%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1/</link>
+    <pubDate>Sun, 31 Oct 2021 13:26:47 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://graficc.github.io/posts/%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1/</guid>
     <description><![CDATA[<h1 id="对透视投影的深入思考">对透视投影的深入思考</h1>
 <p>投影变换是整个渲染管线里，设计得最复杂的，也最巧妙的一次变换。</p>
 <h1 id="前因">前因</h1>
@@ -94,8 +94,8 @@
 </item>
 <item>
     <title>计算机图形学——学习笔记</title>
-    <link>http://limbostray.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
-    <pubDate>Sun, 16 May 2021 21:13:06 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+    <link>http://graficc.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+    <pubDate>Sun, 16 May 2021 21:13:06 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://graficc.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
     <description><![CDATA[<h1 id="计算机图形学学习笔记">计算机图形学——学习笔记</h1>
 <h1 id="前言">前言</h1>
 <p>:::info</p>
