@@ -14,9 +14,4 @@ sleep 1s
 git commit -m "$1"
 sleep 0.5s
 
-CONID='limbostray'
-CONKEY='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'
-
-expect -c "spawn git push origin main; expect "*Username*" { send "${CONID}
-"; exp_continue } "*Password*" { send "${CONKEY}
-" }; interact"
+xclip -sel clip < ~/Documents/tocken_limbo.txt
