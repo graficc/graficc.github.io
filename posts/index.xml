@@ -1,4 +1,14 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>所有文章 - Horel's Blog</title><link>http://limbostray.github.io/posts/</link><description>所有文章 | Horel's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1494255412@mail.dlut.edu.cn (Horel)</managingEditor><webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Tue, 26 Oct 2021 21:14:32 +0800</lastBuildDate><atom:link href="http://limbostray.github.io/posts/" rel="self" type="application/rss+xml"/><item><title>重学C++：类型推导</title><link>http://limbostray.github.io/posts/auto/</link><pubDate>Tue, 26 Oct 2021 21:14:32 +0800</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/auto/</guid><description><![CDATA[<h2 id="常见的坑">常见的坑</h2>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>所有文章 - Horel&#39;s Blog</title>
+        <link>http://limbostray.github.io/posts/</link>
+        <description>所有文章 | Horel&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1494255412@mail.dlut.edu.cn (Horel)</managingEditor>
+            <webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Tue, 26 Oct 2021 21:14:32 &#43;0800</lastBuildDate><atom:link href="http://limbostray.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>重学C&#43;&#43;：类型推导</title>
+    <link>http://limbostray.github.io/posts/auto/</link>
+    <pubDate>Tue, 26 Oct 2021 21:14:32 &#43;0800</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/auto/</guid>
+    <description><![CDATA[<h2 id="常见的坑">常见的坑</h2>
 <ol>
 <li>
 <p><code>auto</code>可以在一条语句中声明多个变量，但是所有变量的类型必须一致。</p>
@@ -26,7 +36,13 @@
 <li><code>auto</code>尽量只在类型较长但比较清晰时使用。</li>
 <li><code>decltype</code>尽量不要使用。</li>
 </ol>
-]]></description></item><item><title>重学C++：Const二三事</title><link>http://limbostray.github.io/posts/const/</link><pubDate>Tue, 26 Oct 2021 15:53:11 +0800</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/const/</guid><description><![CDATA[<h2 id="常见的坑">常见的坑</h2>
+]]></description>
+</item>
+<item>
+    <title>重学C&#43;&#43;：Const二三事</title>
+    <link>http://limbostray.github.io/posts/const/</link>
+    <pubDate>Tue, 26 Oct 2021 15:53:11 &#43;0800</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/const/</guid>
+    <description><![CDATA[<h2 id="常见的坑">常见的坑</h2>
 <ol>
 <li>
 <p>仅用<code>const</code>修饰的对象只在单个文件中有效，如果想在多个文件之间共享<code>const</code>对象，必须在对象<strong>定义</strong>的前面加<code>extern</code>。</p>
@@ -216,4 +232,7 @@
 <ol>
 <li>如果认定变量是一个常量表达式，那就将其声明成<code>constexpr</code>类型。</li>
 </ol>
-]]></description></item></channel></rss>
+]]></description>
+</item>
+</channel>
+</rss>
