@@ -17,7 +17,6 @@ sleep 0.5s
 CONID='limbostray'
 CONKEY='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'
 
-cd /home/wwwroot/default/project
 expect -c "spawn git push origin main; expect "*Username*" { send "${CONID}
 "; exp_continue } "*Password*" { send "${CONKEY}
 " }; interact"
