@@ -1,13 +1,13 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>C&#43;&#43; - 分类 - Horel&#39;s Blog</title>
-        <link>http://limbostray.github.io/categories/c&#43;&#43;/</link>
+        <link>http://graficc.github.io/categories/c&#43;&#43;/</link>
         <description>C&#43;&#43; - 分类 - Horel&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1494255412@mail.dlut.edu.cn (Horel)</managingEditor>
-            <webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Sun, 21 Nov 2021 21:09:34 &#43;0000</lastBuildDate><atom:link href="http://limbostray.github.io/categories/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Sun, 21 Nov 2021 21:09:34 &#43;0000</lastBuildDate><atom:link href="http://graficc.github.io/categories/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
     <title>CMake Example</title>
-    <link>http://limbostray.github.io/posts/cmake-example/</link>
-    <pubDate>Sun, 21 Nov 2021 21:09:34 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/cmake-example/</guid>
+    <link>http://graficc.github.io/posts/cmake-example/</link>
+    <pubDate>Sun, 21 Nov 2021 21:09:34 &#43;0000</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://graficc.github.io/posts/cmake-example/</guid>
     <description><![CDATA[<h1 id="cmake-example">CMake Example</h1>
 <p>因为众所周知的原因 <del>CMake限制了C++的发展</del></p>
 <p>不得不简单学习了一下CMake的使用，列在这里</p>
