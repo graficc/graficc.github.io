@@ -1,15 +1,13 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Horel&#39;s Blog</title>
-        <link>http://limbostray.github.io/</link>
-        <description>Welcome to Horel&#39;s blog.</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1494255412@mail.dlut.edu.cn (Horel)</managingEditor>
-            <webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Tue, 26 Oct 2021 21:14:32 &#43;0800</lastBuildDate>
-            <atom:link href="http://limbostray.github.io/index.xml" rel="self" type="application/rss+xml" />
-        <item>
+        <title>All Posts - Horel&#39;s Blog</title>
+        <link>http://limbostray.github.io/en/posts/</link>
+        <description>All Posts | Horel&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>1494255412@mail.dlut.edu.cn (Horel)</managingEditor>
+            <webMaster>1494255412@mail.dlut.edu.cn (Horel)</webMaster><lastBuildDate>Tue, 26 Oct 2021 21:14:32 &#43;0800</lastBuildDate><atom:link href="http://limbostray.github.io/en/posts/" rel="self" type="application/rss+xml" /><item>
     <title>重学C&#43;&#43;：类型推导</title>
-    <link>http://limbostray.github.io/posts/auto/</link>
-    <pubDate>Tue, 26 Oct 2021 21:14:32 &#43;0800</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/auto/</guid>
+    <link>http://limbostray.github.io/en/posts/auto/</link>
+    <pubDate>Tue, 26 Oct 2021 21:14:32 &#43;0800</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/en/posts/auto/</guid>
     <description><![CDATA[<h2 id="常见的坑">常见的坑</h2>
 <ol>
 <li>
@@ -42,8 +40,8 @@
 </item>
 <item>
     <title>重学C&#43;&#43;：Const二三事</title>
-    <link>http://limbostray.github.io/posts/const/</link>
-    <pubDate>Tue, 26 Oct 2021 15:53:11 &#43;0800</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/posts/const/</guid>
+    <link>http://limbostray.github.io/en/posts/const/</link>
+    <pubDate>Tue, 26 Oct 2021 15:53:11 &#43;0800</pubDate><author>1494255412@mail.dlut.edu.cn (Horel)</author><guid>http://limbostray.github.io/en/posts/const/</guid>
     <description><![CDATA[<h2 id="常见的坑">常见的坑</h2>
 <ol>
 <li>
