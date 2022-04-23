@@ -13,4 +13,11 @@ git status
 sleep 1s
 git commit -m "$1"
 sleep 0.5s
-expect -c "spawn git push origin main; expect "*Username*" { send "limbostray"; exp_continue } "*Password*" { send "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"}; interact"
+
+CONID='limbostray'
+CONKEY='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'
+
+cd /home/wwwroot/default/project
+expect -c "spawn git push origin main; expect "*Username*" { send "${CONID}
+"; exp_continue } "*Password*" { send "${CONKEY}
+" }; interact"
